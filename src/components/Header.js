@@ -4,8 +4,6 @@ import { toggleMenu } from "../utils/appSlice";
 import { YOUTUBE_SEARCH_SUGGESTION } from "../utils/Constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBars,
-  faBell,
   faMagnifyingGlass,
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
@@ -44,7 +42,6 @@ const Header = () => {
   }, [searchQuery]);
 
   const getSearchSuggestions = async () => {
-    console.log("API-Call - ",searchQuery)
     try {
       const response = await fetch(
         `${YOUTUBE_SEARCH_SUGGESTION}${searchQuery}`
