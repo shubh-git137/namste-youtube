@@ -7,6 +7,7 @@ export const buttonList = [
   "Mixes",
   "T-Series",
   "Kapil Sharma",
+  "Invest Har Din"
 ];
 
 const MY_GOOGLE_API_KEY = "AIzaSyC5X5-j5jy63NHqaQvVANbBhi1eGnlpnss";
