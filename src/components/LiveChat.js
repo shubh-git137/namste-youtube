@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ChatMessage from "./ChatMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { addMessages } from "../utils/chatSlice";
@@ -7,9 +7,9 @@ import { generateRandomName, generateRandomText } from "../utils/helper";
 const LiveChat = () => {
   const dispatch = useDispatch();
   const chatMessages = useSelector((store) => store.chat.messages);
+  const [liveMessage, setLiveMessage] = useState("");
   useEffect(() => {
     const i = setInterval(() => {
-      console.log("API POLLIING");
       dispatch(
         addMessages({
           name: generateRandomName(),
@@ -19,7 +19,7 @@ const LiveChat = () => {
     }, 1000);
 
     return () => clearInterval(i);
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -30,10 +30,27 @@ const LiveChat = () => {
           ))}
         </div>
         <hr className="p-2 "></hr>
-        <div className="border border-black w-full p-2 ml-2 mt-2">
-          <input className="w-64" type="text" />
+        <form className="border border-black w-full p-2 ml-2 mt-2" onSubmit={(e) => {e.preventDefault()
+          dispatch(
+            addMessages({
+              name: "Shubham Tiwari",
+              message: liveMessage,
+            })
+          );
+          setLiveMessage("");
+        }
+         
+        }>
+          <input
+            className="w-64"
+            type="text"
+            value={liveMessage}
+            onChange={(e) => {
+              setLiveMessage(e.target.value);
+            }}
+          />
           <button className={"px-2 mx-2 bg-green-200"}>Send</button>
-        </div>
+        </form>
       </div>
     </>
   );
